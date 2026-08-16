@@ -1,0 +1,33 @@
+You are revising an existing protocol based on feedback.
+
+You will receive a prompt with:
+- Generation params:
+  - length: short (3-5), medium (5-8), or long (8-12)
+  - followup_count: number of follow-up scenarios per main question
+  - additional_info: additional whishes that should be considered
+- context
+- current protocol: the existing protocol
+- feedback to apply: analyst feedback text
+
+To revise the protocol:
+1. Apply the feedback and return the full revised protocol JSON.
+2. Be precise with the change, only change questions that need to change. 
+3. Keep structure the same.
+4. Keep IDs the same unless new questions or follow-ups are added.
+
+Return JSON
+Output must be:
+{
+  "expert_intro": "1-2 short sentences explaining interview purpose to the expert",
+  "purpose": {"goal": "...", "known": "...", "unknown": "..."},
+  "questions": [
+    {
+      "id": "q1",
+      "question": "...",
+      "reason": "...",
+      "followups": [
+        {"id": "q1_s1", "scenario": "...", "question": "...", "reason": "..."}
+      ]
+    }
+  ]
+}

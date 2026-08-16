@@ -1,0 +1,20 @@
+@startuml
+actor "Process Analyst" as Analyst
+participant "React Frontend" as Frontend
+participant "Knowledge Router" as Router
+participant "Knowledge Service" as Service
+participant "OpenAI" as OpenAI
+database "Postgres DB" as DB
+Analyst -> Frontend: Trigger inconsistency detection
+Frontend -> Router: Send detection request
+Router -> Router: Authenticate analyst
+Router -> Service: Start inconsistency detection
+Service -> DB: Retrieve relevant interview data
+DB --> Service: Relevant interview data
+Service -> OpenAI: Request inconsistency analysis
+OpenAI --> Service: Detected inconsistencies
+Service -> DB: Store new inconsistencies
+Service --> Router: Detection result
+Router --> Frontend: Detection result
+Frontend --> Analyst: Display inconsistency results
+@enduml

@@ -1,0 +1,52 @@
+You are generating an interview protocol for a specific domain expert for a process elicitation interview for BPMN modeling.
+The primary goal is to validate the current process model, not to discover new process knowledge.
+Questions should explicitly reference flows, handoffs, decisions, events, responsibilities, or constraints already present in the current_model_description.
+However, the domain expert cannot see the model directly, so don't include 'the model shows this'.
+A question should only seek new information when necessary to resolve a selected unresolved inconsistency.
+
+You will receive a prompt with:
+- Generation params:
+  - length: short (3-5), medium (5-8), or long (8-12)
+  - followup_count: number of follow-up scenarios per main question
+  - additional_info: additional whishes that should be considered
+- context:
+  - process: {name, initial_description}
+  - target_expert: {role}
+  - past_interviews_target_expert and past_interviews_other_experts, with either:
+    - {round_number, qa_items[{question, answer}], expert_role}
+    - {round_number, summary: {key_points[]}, expert_role}
+  - selected_unresolved_inconsistencies: list of {id, title, description}
+  - current_model_description: {description}, this is what we already know and how the process now elicited looks like
+
+To generate the validation protocol:
+1. Prioritize selected_unresolved_inconsistencies as motivation for questions.
+2. Prioritize questions that validate flow, triggers, handoffs and decisions.
+3. Avoid questions about opinions, tools, and challenges.
+
+Content rules:
+1. Each question must be clear, atomic, concise and specific.
+2. Each question must include a short reason for asking the question.
+3. Follow-ups are conditional scenarios.
+4. For every follow-up, scenario must start with: Expert (role) says ...
+5. Do not use generic scenario like If yes and If no.
+6. And then the question should be question that is asked when that scenario is applicable.
+7. IDs must be ordered: q1, q2, ... and q1_s1, q1_s2, ...
+8. expert_intro must be specific to this interview round.
+9. Keep text concise.
+
+Return JSON
+Output must be:
+{
+  "expert_intro": "1-2 short sentences explaining interview purpose to the expert",
+  "purpose": {"goal": "...", "known": "...", "unknown": "..."},
+  "questions": [
+    {
+      "id": "q1",
+      "question": "...",
+      "reason": "...",
+      "followups": [
+        {"id": "q1_s1", "scenario": "...", "question": "...", "reason": "..."}
+      ]
+    }
+  ]
+}

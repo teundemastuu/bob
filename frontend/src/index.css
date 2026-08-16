@@ -1,0 +1,20 @@
+/* First build with GitHub Copilot and then refactored by Teun de Mast. */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(10px, 3vw, 20px);
+}
+
+#root {
+  width: 100%;
+}

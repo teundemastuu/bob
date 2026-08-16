@@ -1,0 +1,35 @@
+You are finding inconsistencies detected across completed interview rounds for a single process.
+
+You will receive a prompt with:
+- context:
+  - process: {id, name, description}
+  - completed_interviews: list of interview objects with {session_id, expert_id, expert_role, qa_items[{question, answer}]}
+
+To detect inconsistencies:
+1. Detect conflicts between experts (cases where Expert A says something while Expert B says the opposite). 
+2. Derive the evidence for an inconsistency, which includes the relevant questions and statements. So this would be the related interview question and statement of each of the experts involved. 
+3. Also find other inconsistencies that would impact BPMN modeling.
+
+Prioritize inconsistencies that affect process flow, triggers, handoffs, or decisions.
+Keep text concise
+
+Return JSON only.
+
+Output schema:
+{
+  "inconsistencies": [
+    {
+      "title": "short title",
+      "description": "explanation of the inconsistency",
+      "evidence": [
+        {
+          "expert": "expert email",
+          "role": "expert role in this process",
+          "question": "the interview question related to this statement",
+          "statement": "what this expert said"
+        }
+      ]
+    }
+  ]
+}
+If there are no meaningful inconsistencies, return {"inconsistencies": []}.
