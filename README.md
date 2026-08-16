@@ -1,7 +1,7 @@
 # BoB (Builder of BPMN)
 
 Prototype accompanying the paper *A Human-in-the-Loop LLM-Based Framework for
-Eliciting Distributed Process Knowledge for BPMN Modeling*.
+the Iterative Elicitation of Process Knowledge*.
 
 BoB is a web application in which a process analyst generates and approves
 interview protocols, an LLM interviews domain experts, and the gathered
@@ -15,7 +15,6 @@ consolidated into a process description from which a BPMN model is generated.
 ## Prerequisites
 
 - Docker and Docker Compose
-- Node.js 18 or newer (only for running the frontend outside Docker)
 - An OpenAI API key
 - The BPMN layout service (see below)
 
@@ -32,7 +31,6 @@ docker run -d --name bpmn-service -p 8098:8098 bpmn-generator:v1
 ```
 
 Point `BPMN_GENERATOR_URL` at it (default `http://host.docker.internal:8098`).
-Everything except model generation works without it.
 
 ## Running
 
@@ -55,14 +53,6 @@ npm install
 npm run dev
 ```
 
-## Usage
-
-Register as **analyst** or as **expert**; the two roles have separate
-interfaces. As an analyst, store your OpenAI API key in the account settings,
-create a process, and generate an interview protocol for an expert. Experts see
-only the sessions assigned to them and never see the protocol configuration,
-the findings, or the model.
-
 ## Repository layout
 
 ```
@@ -78,23 +68,10 @@ frontend/src/
   pages/  components/  context/  hooks/
 ```
 
-The `llm_*_instructions.txt` and `bpmn_*.txt` files alongside each service are
-the prompt instructions described in Section 5 of the paper.
-
-## Evaluation instrumentation
-
-`services/protocol/evaluation.py` and `services/interview/evaluation.py`
-implement the in-app rating forms used to collect the results reported in the
-paper (protocol quality and interview quality). Responses are appended to CSV
-files in `backend/app/evaluation_data/`, which is gitignored; no participant
-data is included in this repository.
-
 ## Notes
 
 - The BPMN generation prompt, the model JSON schema and the layout service are
   adapted from BPMN-Chatbot++ (Safan & Köpke, 2025).
-- `OPENAI_MODEL` should always be set explicitly in `.env`; the fallback default
-  in `app/core/config.py` is not a valid model name.
 
 ## License
 
