@@ -1,6 +1,6 @@
 # BoB (Builder of BPMN)
 
-Prototype accompanying the paper *A Human-in-the-Loop LLM-Based Framework for
+Prototype for the paper *A Human-in-the-Loop LLM-Based Framework for
 the Iterative Elicitation of Process Knowledge*.
 
 BoB is a web application in which a process analyst generates and approves
