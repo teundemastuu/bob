@@ -52,6 +52,6 @@ def call_openai(
             return parsed
 
         return text
-    except Exception as exc:
+    except Exception:
         logger.exception("LLM call failed")
         raise

@@ -71,22 +71,6 @@ def _write_thread_metadata(paths: StoragePaths, data: dict[str, dict]) -> None:
     paths.thread_metadata_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
-def set_thread_used_sessions(
-    thread_id: str,
-    process_id: str,
-    used_session_ids: list[str],
-    base_dir: Path | None = None,
-) -> None:
-    paths = ensure_storage(base_dir)
-    data = _read_thread_metadata(paths)
-    data[str(thread_id)] = {
-        "processId": str(process_id),
-        "usedSessionIds": [str(item) for item in used_session_ids],
-        "usedSessionSnapshots": {str(item): "" for item in used_session_ids},
-    }
-    _write_thread_metadata(paths, data)
-
-
 def set_thread_used_session_snapshots(
     thread_id: str,
     process_id: str,
@@ -119,11 +103,6 @@ def get_thread_used_session_snapshots(thread_id: str, base_dir: Path | None = No
     if isinstance(used, list):
         return {str(entry): "" for entry in used}
     return {}
-
-
-def get_thread_used_sessions(thread_id: str, base_dir: Path | None = None) -> list[str]:
-    snapshots = get_thread_used_session_snapshots(thread_id, base_dir)
-    return list(snapshots.keys())
 
 
 def _read_process_history(paths: StoragePaths) -> dict[str, list[str]]:

@@ -8,17 +8,15 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 from typing import Iterable
 from pathlib import Path
 
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.security import decrypt_openai_key
 from app.models.interview import InterviewSession
 from app.models.knowledge import InterviewInconsistency, InterviewKnowledgeGap
-from app.models.process import Process, process_experts
+from app.models.process import Process
 from app.services.llm_client import call_openai
 
 TARGET_RECENT_RAW_COUNT = 4
@@ -41,20 +39,6 @@ def serialize_session_context(session: InterviewSession, expert_role: str | None
     for idx, qa in enumerate(session.qa_items, start=1):
         parts.append(f"Q{idx}: {qa.question}")
         parts.append(f"A{idx}: {qa.answer}")
-    return "\n".join(parts)
-
-
-def serialize_session_summary_context(session: InterviewSession, expert_role: str | None = None) -> str:
-    summary = session.session_summary if isinstance(session.session_summary, dict) else {}
-    key_points = summary.get("key_points") if isinstance(summary, dict) else None
-    parts: list[str] = [
-        f"Interview session {session.round_number} with role={expert_role}"
-    ]
-    if isinstance(key_points, list):
-        for point in key_points:
-            text = str(point or "").strip()
-            if text:
-                parts.append(f"- {text}")
     return "\n".join(parts)
 
 

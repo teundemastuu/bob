@@ -12,7 +12,6 @@ from app.models.user import User, UserRole
 from app.schemas.knowledge import (
     DetectInconsistenciesRequest,
     DetectInconsistenciesResponse,
-    InconsistencyItem,
     ResolveInconsistencyRequest,
     ResolveInconsistencyResponse,
     IgnoreInconsistencyRequest,
@@ -21,7 +20,6 @@ from app.schemas.knowledge import (
     UnignoreInconsistencyResponse,
     DetectKnowledgeGapsRequest,
     DetectKnowledgeGapsResponse,
-    KnowledgeGapItem,
     ResolveKnowledgeGapRequest,
     ResolveKnowledgeGapResponse,
     IgnoreKnowledgeGapRequest,

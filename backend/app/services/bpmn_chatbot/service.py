@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 from app.core.security import decrypt_openai_key
 from app.models.interview import InterviewSession
 from app.models.process import Process, process_experts
-from app.models.user import User, UserRole
+from app.models.user import User
 from app.schemas.bpmn import BpmnCreateRequest, BpmnDeleteRequest, BpmnDescriptionRequest, BpmnSaveRequest, BpmnUpdateRequest
 from app.services.bpmn_chatbot.selector import (
     analyst_knowledge_instructions,

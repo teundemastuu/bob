@@ -177,10 +177,8 @@ def get_next_question(protocol: dict, qa_items: list, current_step_index: int, a
                 if derived_id and derived_id in candidate_lookup:
                     candidate = candidate_lookup[derived_id]
                     return {"id": candidate["id"], "question": candidate["question"]}
-        except (ValueError, json.JSONDecodeError) as exc:
+        except (ValueError, json.JSONDecodeError):
             pass
-    else:
-        pass
 
     fallback = _fallback_next_question(protocol, asked_set) # only fallback to main questions if LLM fails
     return fallback

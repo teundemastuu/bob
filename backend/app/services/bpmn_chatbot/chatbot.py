@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import json
 import os
-import re
 import uuid
 from pathlib import Path
 
@@ -51,16 +50,6 @@ def _create_llm_process_description(api_key: str | None, model_json: dict) -> st
         return None
     normalized = text.strip()
     return normalized or None
-
-
-def _find_and_parse_json(input_text: str) -> dict | None:
-    match = re.search(r"{[\s\S]*}", input_text)
-    if not match:
-        return None
-    try:
-        return json.loads(match.group(0))
-    except json.JSONDecodeError:
-        return None
 
 
 def _load_llm_instructions() -> str:

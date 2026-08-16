@@ -10,7 +10,6 @@ from app.services.protocol.selector import derive_llm_inputs
 from app.services.protocol.validators import is_valid_protocol
 from app.services.llm_client import call_openai
 from pathlib import Path
-import os
 
 LLM_INSTRUCTIONS_DISCOVERY_PATH = Path(__file__).resolve().parent / "llm_instructions_discovery.txt"
 LLM_INSTRUCTIONS_VALIDATION_PATH = Path(__file__).resolve().parent / "llm_instructions_validation.txt"

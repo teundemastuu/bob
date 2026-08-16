@@ -18,7 +18,6 @@ from app.services.interview import service as interview
 from app.services.interview.evaluation import save_interview_completion_evaluation
 from app.services.auth.service import require_role
 from app.models.user import User, UserRole
-from app.models.process import Process
 
 router = APIRouter()
 logger = logging.getLogger(__name__)

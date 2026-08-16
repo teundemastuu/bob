@@ -12,10 +12,11 @@ from app.routes.processes import router as processes_router
 from app.routes.bpmn import router as bpmn_router
 from app.db.session import engine
 from app.db.base import Base
-from app.models import interview  # register the SQLAlchemy models 
-from app.models import user  #register the SQLAlchemy models 
-from app.models import process  # register the SQLAlchemy models 
-from app.models import knowledge  # register the SQLAlchemy models
+# Imported for their side effect: registering the SQLAlchemy models on Base.metadata
+from app.models import interview  # noqa: F401
+from app.models import user  # noqa: F401
+from app.models import process  # noqa: F401
+from app.models import knowledge  # noqa: F401
 
 app = FastAPI(title="BOB")
 

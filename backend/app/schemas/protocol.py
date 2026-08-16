@@ -60,15 +60,3 @@ class ProtocolFeedbackEvaluationRequest(BaseModel):
 
 
 
-class ProtocolPublishedRead(BaseModel):
-    id: UUID
-    process_id: UUID
-    expert_id: UUID
-    round_number: int
-    status: ProtocolStatus
-    content: dict
-    published_by_id: UUID | None = None
-    updated_at: datetime
-
-    class Config:
-        from_attributes = True

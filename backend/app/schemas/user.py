@@ -16,10 +16,6 @@ class UserCreate(BaseModel):
     role: UserRole
     name: str | None = None
 
-class UserLogin(BaseModel):
-    email: EmailStr
-    password: str
-
 class UserOut(BaseModel):
     id: UUID
     email: EmailStr

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import * as api from '../../services/api'
 
-export function ProcessHeader({ userName, onOpenProfile }) {
+function ProcessHeader({ userName, onOpenProfile }) {
   return (
     <div className="session-info">
       <h1>
@@ -17,7 +17,7 @@ export function ProcessHeader({ userName, onOpenProfile }) {
   )
 }
 
-export function ProcessCard({ process, onViewDetails, onDelete, loading }) {
+function ProcessCard({ process, onViewDetails, onDelete, loading }) {
   const statusLabel = process.protocol_creatable ? 'Protocol can be created' : 'Protocol cannot be created'
   const statusColor = process.protocol_creatable ? '#2e7d32' : '#ef6c00'
 
